@@ -100,7 +100,7 @@ public class TransactionServiceImpl implements TransactionService {
         accountRepository.save(fromAccount);
         accountRepository.save(toAccount);
 
-        String transferRefId = "TXN-REF-" + UUID.randomUUID();
+         String transferRefId = generateTransferRefId(fromAccount, toAccount);
 
         Transaction debitTxn = saveTransaction(fromAccount, TransactionType.TRANSFER_OUT, request.getAmount(), transferRefId);
         Transaction creditTxn = saveTransaction(toAccount, TransactionType.TRANSFER_IN, request.getAmount(), transferRefId);
@@ -110,7 +110,10 @@ public class TransactionServiceImpl implements TransactionService {
 
         return Arrays.asList(toDto(debitTxn), toDto(creditTxn));
     }
-
+private String generateTransferRefId(Account fromAccount, Account toAccount) {
+    return "TXN-REF-" + fromAccount.getAccountNumber() + "-"
+            + toAccount.getAccountNumber() + "-" + System.currentTimeMillis();
+}
     private Transaction saveTransaction(Account account, TransactionType type, BigDecimal amount, String transferRefId) {
         Transaction txn = new Transaction();
         txn.setAccount(account);
