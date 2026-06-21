@@ -23,7 +23,7 @@ App starts on **`http://localhost:8082`**.
 | Swagger UI | `http://localhost:8082/swagger-ui.html` |
 | OpenAPI spec (JSON) | `http://localhost:8082/v3/api-docs` |
 | H2 console | `http://localhost:8082/h2-console` |
-| H2 JDBC URL | `jdbc:h2:mem:bankingdb` (user: `bank_db`, no password) |
+| H2 JDBC URL | `jdbc:h2:mem:bankingdb` (user: `bank_db`, pwd: wiz@linux) |
 
 ### Seeding sample data
 To start with pre-populated test data instead of an empty database, add `data.sql`
