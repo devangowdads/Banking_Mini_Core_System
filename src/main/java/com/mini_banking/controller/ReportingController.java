@@ -25,8 +25,8 @@ public class ReportingController {
             @RequestParam String from,
             @RequestParam String to) {
         
-        LocalDate fromDate = LocalDate.parse(from);  // "2025-01-01" → LocalDate
-        LocalDate toDate = LocalDate.parse(to);      // "2025-06-01" → LocalDate
+        LocalDate fromDate = LocalDate.parse(from);  
+        LocalDate toDate = LocalDate.parse(to);      
         
         return ResponseEntity.ok(reportingService.getStatement(accountId, fromDate, toDate));
     }
