@@ -1,0 +1,163 @@
+{
+  "info": {
+    "name": "Banking Mini Core System",
+    "description": "REST API collection for the Banking Mini Core System (Spring Boot). Set the {{baseUrl}} variable if not running on localhost:8080.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" }
+  ],
+  "item": [
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone\": \"9876543210\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/customers", "host": ["{{baseUrl}}"], "path": ["api", "customers"] }
+          }
+        },
+        {
+          "name": "Get Customer By Id",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/customers/1", "host": ["{{baseUrl}}"], "path": ["api", "customers", "1"] }
+          }
+        },
+        {
+          "name": "Get All Customers",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/customers", "host": ["{{baseUrl}}"], "path": ["api", "customers"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Create Account",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": 1,\n  \"accountType\": \"SAVINGS\",\n  \"openingBalance\": 1000.00\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/accounts", "host": ["{{baseUrl}}"], "path": ["api", "accounts"] }
+          }
+        },
+        {
+          "name": "Get Account By Id",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/accounts/1", "host": ["{{baseUrl}}"], "path": ["api", "accounts", "1"] }
+          }
+        },
+        {
+          "name": "Get Accounts By Customer",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/customer/1",
+              "host": ["{{baseUrl}}"], "path": ["api", "accounts", "customer", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Deposit",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": 1,\n  \"amount\": 500.00\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/transactions/deposit", "host": ["{{baseUrl}}"], "path": ["api", "transactions", "deposit"] }
+          }
+        },
+        {
+          "name": "Withdraw",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": 1,\n  \"amount\": 200.00\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/transactions/withdraw", "host": ["{{baseUrl}}"], "path": ["api", "transactions", "withdraw"] }
+          }
+        },
+        {
+          "name": "Transfer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromAccountId\": 1,\n  \"toAccountId\": 2,\n  \"amount\": 250.00\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/transactions/transfer", "host": ["{{baseUrl}}"], "path": ["api", "transactions", "transfer"] }
+          }
+        },
+        {
+          "name": "Withdraw - Insufficient Balance (error example)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": 1,\n  \"amount\": 99999999.00\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/transactions/withdraw", "host": ["{{baseUrl}}"], "path": ["api", "transactions", "withdraw"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reporting",
+      "item": [
+        {
+          "name": "Get Account Statement",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/1/statement?from=2026-06-01&to=2026-06-30",
+              "host": ["{{baseUrl}}"], "path": ["api", "accounts", "1", "statement"],
+              "query": [
+                { "key": "from", "value": "2026-06-01" },
+                { "key": "to", "value": "2026-06-30" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Balance Summary",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/accounts/1/balance-summary?from=2026-06-01&to=2026-06-30",
+              "host": ["{{baseUrl}}"], "path": ["api", "accounts", "1", "balance-summary"],
+              "query": [
+                { "key": "from", "value": "2026-06-01" },
+                { "key": "to", "value": "2026-06-30" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
