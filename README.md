@@ -42,7 +42,7 @@ dto/response_dto/        -> CustomerResponseDTO, AccountResponseDTO, Transaction
 repository/               -> Spring Data JPA interfaces (pessimistic-lock query used for transfers)
 service_implementation/  -> business logic: deposit, withdraw, transfer, statements, balance summary
 controller/               -> REST endpoints
-exception/                -> ResourceNotFoundException, InsufficientBalanceException, InvalidTransactionException, GlobalExceptionHandler
+exception/                -> ResourceNotFoundException, InsufficientBalanceException, InvalidTransactionException, GlobalExceptionHandler,ExceptionConstraints
 aspect/                   -> LoggingAspect (AOP) - logs entry/exit/exceptions for every service + controller call
 ```
 
